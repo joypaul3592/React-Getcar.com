@@ -6,11 +6,11 @@ const Car = ({ car }) => {
             <img className=' w-full md:h-72 h-98 mb-10 rounded' src={car.img} alt="" />
 
             <div className="car-info flex  items-center justify-between ">
-                <div className="div  w-1/2 ml-5 text-left text-white">
+                <div className="div  w-1/2 ml-5 text-left ">
                     <p className='text-xl font-mono'> Name: {car.model}</p>
                     <p className='text-xl font-mono'>{car.year}</p>
                 </div>
-                <div className="div w-1/2 ml-5 text-left text-white">
+                <div className="div w-1/2 ml-5 text-left ">
                     <p className='text-xl font-mono'> {car.company}</p>
                     <p className='text-xl font-mono'>Price: {car.price}</p>
                 </div>
