@@ -2,7 +2,7 @@ import React from 'react';
 
 const Car = ({ car }) => {
     return (
-        <div className=' bg-stone-900  shadow-lg p-4 rounded'>
+        <div className=' bg-stone-100  shadow-lg p-4 rounded'>
             <img className=' w-full md:h-72 h-98 mb-10 rounded' src={car.img} alt="" />
 
             <div className="car-info flex  items-center justify-between ">
