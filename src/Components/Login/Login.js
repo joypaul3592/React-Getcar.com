@@ -22,7 +22,17 @@ const Login = () => {
         signInWithEmailAndPassword(email, password)
 
 
-
+        if (user) {
+            naviget('/')
+            setError('')
+            console.log(user);
+            return
+        }
+        if (!user) {
+            setError('vai kam hoibe nah')
+            return
+        }
+        return
     }
 
 
