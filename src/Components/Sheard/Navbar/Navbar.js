@@ -1,12 +1,18 @@
 import { Disclosure, Menu } from '@headlessui/react'
 import { MenuIcon, XIcon } from '@heroicons/react/outline'
+import { useAuthState } from 'react-firebase-hooks/auth'
 import { Link, NavLink } from 'react-router-dom'
+import auth from '../../../Firebase/Firebase.init'
+import { signOut } from 'firebase/auth';
+
 
 
 function classNames(...classes) {
     return classes.filter(Boolean).join(' ')
 }
 const Navbar = () => {
+
+    const [user] = useAuthState(auth)
     return (
         <Disclosure as="nav" className="bg-gray-800">
             {({ open }) => (
@@ -35,7 +41,7 @@ const Navbar = () => {
                                         <h1 className='text-3xl font-mono text-white mx-4'>Getcar</h1>
                                     </Link>
                                 </div>
-                                <div className="hidden sm:block sm:ml-6">
+                                <div className="hidden  sm:block sm:ml-6">
                                     <div className="flex space-x-4">
                                         <NavLink
                                             to={'/'}
@@ -51,10 +57,21 @@ const Navbar = () => {
                                             className={({ isActive }) => (isActive ? 'text-blue-500 px-3 py-2 rounded-md text-xl font-medium ' : 'text-white px-3 py-2 rounded-md text-xl font-medium')}
                                         >Cars</NavLink>
 
+                                        {
+                                            user?.uid ? <NavLink
+                                                to={'login'}
+                                                onClick={() => { signOut(auth) }}
+                                                className={({ isActive }) => (isActive ? 'text-blue-500 px-3 py-2 rounded-md text-xl font-medium ' : 'text-white px-3 py-2 rounded-md text-xl font-medium')}>LogOut</NavLink> :
+                                                <NavLink
+                                                    to={'login'}
+                                                    className={({ isActive }) => (isActive ? 'text-blue-500 px-3 py-2 rounded-md text-xl font-medium ' : 'text-white px-3 py-2 rounded-md text-xl font-medium')}
+                                                >Login</NavLink>
+                                        }
+
                                     </div>
                                 </div>
                             </div>
-                            <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+                            <div className=" absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
                                 <Menu as="div" className="ml-3 relative">
                                     <div>
                                         <Menu.Button className="bg-gray-800 flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
@@ -91,8 +108,9 @@ const Navbar = () => {
                         </div>
                     </Disclosure.Panel>
                 </>
-            )}
-        </Disclosure>
+            )
+            }
+        </Disclosure >
     );
 };
 

@@ -1,0 +1,89 @@
+.from-container{
+    background: rgb(126, 233, 183);
+    width: 50%;
+    margin: auto;
+    margin-top: 8rem;
+    padding: 20px;
+    border-radius: 10px;
+}
+.from-container h1{
+    line-height: 0;
+    text-align: center;
+    font-size: 28px;
+    font-weight: 500;
+    margin-bottom: 30px;
+}
+.hr{
+    height: 1px;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.258);
+    margin-bottom: 40px;
+}
+.input-container{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+.input-container label{
+    font-size: 18px;
+    color:rgba(4, 4, 92, 0.881);
+    margin-bottom: 3px;
+    margin-left: 5px;
+}
+input{
+    padding: 7px 10px;
+    border: 1px solid rgba(18, 17, 17, 0.172);
+    outline: none;
+    font-size: 16px;
+    color:rgba(0, 0, 0, 0.62)
+}
+.btn-container{
+    text-align: center;
+    margin-top: 40px;
+}
+.hr-contaier{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 15px 0;
+}
+.hr-contaier p{
+    color: rgba(0, 0, 0, 0.5);
+}
+.hr-or{
+    height: 1px;
+    width: 45%;
+    background: rgba(0, 0, 0, 0.149);
+}
+.googleSign-container{
+    background: rgb(255, 255, 255);
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    width: 50%;
+    margin: auto;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+.googleSign-container img{
+    width: 45px;
+}
+.googleSign-container h3{
+    line-height: 0;
+    font-size: 16px;
+}
+p{
+    text-align: center;
+    margin-top: 20px;
+    font-weight: 500;
+    cursor: pointer;
+}
+span{
+    color:rgb(152, 111, 6);
+}
+h4{
+    text-align: center;
+    color:rgb(174, 7, 7);
+    font-weight: 500;
+}
