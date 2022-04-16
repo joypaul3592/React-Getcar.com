@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import auth from '../../Firebase/Firebase.init';
 import './Login.css'
-import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
+import { useSignInWithEmailAndPassword, useSignInWithGoogle } from 'react-firebase-hooks/auth';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -15,10 +15,9 @@ const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [signInWithEmailAndPassword, user, loading, error] = useSignInWithEmailAndPassword(auth);
+    const [signInWithGoogle, user2, loading2, error2] = useSignInWithGoogle(auth);
 
-    if (user) {
-        naviget('/')
-    }
+
 
 
     const handdelLogin = (e) => {
@@ -27,15 +26,14 @@ const Login = () => {
     }
 
 
-    useEffect(() => {
-        if (error) {
-            toast('NO!! User Found')
-        }
-    }, [])
 
+    if (user) {
+        naviget('/')
+    }
 
-
-
+    if (error) {
+        toast('NO!! User Found')
+    }
 
 
 
@@ -54,7 +52,6 @@ const Login = () => {
                     <label htmlFor="password">Password</label>
                     <input onBlur={(e) => setPassword(e.target.value)} type="password" name="password" id="password" required />
                 </div>
-                <p>{errors}</p>
                 <div className="btn-container">
                     <button onClick={handdelLogin} className='w-1/2 bg-green-600 py-2 font-mono text-2xl rounded text-white'>Log In</button>
                 </div>
@@ -64,7 +61,7 @@ const Login = () => {
                     <p>or</p>
                     <div className="hr-or"></div>
                 </div>
-                <div className="googleSign-container">
+                <div className="googleSign-container" onClick={() => signInWithGoogle()}>
                     <img src="https://pngimg.com/uploads/google/google_PNG19635.png" alt="" />
                     <h3>Continue With Google</h3>
                 </div>
