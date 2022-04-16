@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import auth from '../../Firebase/Firebase.init';
 import '../Login/Login.css'
-import { useAuthState, useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
+import { useAuthState, useCreateUserWithEmailAndPassword, useSignInWithGoogle } from 'react-firebase-hooks/auth';
 
 
 
@@ -20,6 +20,7 @@ const SignUp = () => {
     const [password, setPassword] = useState('');
     const [comfirePassword, setComfirePassword] = useState('');
     const [createUserWithEmailAndPassword] = useCreateUserWithEmailAndPassword(auth);
+    const [signInWithGoogle] = useSignInWithGoogle(auth);
 
 
 
@@ -71,7 +72,7 @@ const SignUp = () => {
                     <p>or</p>
                     <div className="hr-or"></div>
                 </div>
-                <div className="googleSign-container">
+                <div className="googleSign-container" onClick={() => signInWithGoogle()}>
                     <img src="https://pngimg.com/uploads/google/google_PNG19635.png" alt="" />
                     <h3>Continue With Google</h3>
                 </div>
