@@ -1,39 +1,40 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import auth from '../../Firebase/Firebase.init';
 import './Login.css'
-import { useAuthState, useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
-
+import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Login = () => {
 
 
     const naviget = useNavigate();
-    const [error, setError] = useState('')
+    const [errors, setErrors] = useState('')
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [signInWithEmailAndPassword] = useSignInWithEmailAndPassword(auth);
-    const [user] = useAuthState(auth);
+    const [signInWithEmailAndPassword, user, loading, error] = useSignInWithEmailAndPassword(auth);
+
+    if (user) {
+        naviget('/')
+    }
 
 
     const handdelLogin = (e) => {
         e.preventDefault()
         signInWithEmailAndPassword(email, password)
-
-
-        if (user) {
-            naviget('/')
-            setError('')
-            console.log(user);
-            return
-        }
-        if (!user) {
-            setError('vai kam hoibe nah')
-            return
-        }
-        return
     }
+
+
+    useEffect(() => {
+        if (error) {
+            toast('NO!! User Found')
+        }
+    }, [])
+
+
+
 
 
 
@@ -53,7 +54,7 @@ const Login = () => {
                     <label htmlFor="password">Password</label>
                     <input onBlur={(e) => setPassword(e.target.value)} type="password" name="password" id="password" required />
                 </div>
-                <p>{error}</p>
+                <p>{errors}</p>
                 <div className="btn-container">
                     <button onClick={handdelLogin} className='w-1/2 bg-green-600 py-2 font-mono text-2xl rounded text-white'>Log In</button>
                 </div>
@@ -68,6 +69,7 @@ const Login = () => {
                     <h3>Continue With Google</h3>
                 </div>
             </div>
+            <ToastContainer />
         </div>
     );
 };
