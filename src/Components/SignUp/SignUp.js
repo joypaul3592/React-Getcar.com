@@ -17,6 +17,7 @@ const SignUp = () => {
 
     const [error, setError] = useState('')
     const [email, setEmail] = useState('');
+    const [emailError, setEmailError] = useState('')
     const [password, setPassword] = useState('');
     const [comfirePassword, setComfirePassword] = useState('');
     const [createUserWithEmailAndPassword] = useCreateUserWithEmailAndPassword(auth);
@@ -24,25 +25,34 @@ const SignUp = () => {
 
 
 
+    const emailCheck = (e) => {
+        e.preventDefault()
+        const emailReg = /\S+@\S+\.\S+/;
+        const emailvalue = emailReg.test(e.target.value);
+        if (emailvalue) {
+            setEmail()
+            setEmailError('')
+        } else {
+            setEmail('')
+            setEmailError('Please Give Right email')
+        }
+
+    }
+
+
     const handdelSignUp = (e) => {
-
-
         if (email === '' && password === '' && comfirePassword === '') {
             setError('please fill the box')
             return
         }
-
         if (password !== comfirePassword) {
             setError('passs match hoy nai')
             return
         }
         e.preventDefault()
-
         createUserWithEmailAndPassword(email, password)
         naviget('/cars')
     }
-
-
 
 
     return (
@@ -52,8 +62,9 @@ const SignUp = () => {
                 <div className="hr"></div>
                 <div className="input-container">
                     <label htmlFor="email">Email</label>
-                    <input onBlur={(e) => setEmail(e.target.value)} type="email" name="email" id="email" required />
+                    <input onChange={emailCheck} type="email" name="email" id="email" required />
                 </div>
+                <p className=' text-red-500 mb-7'>{emailError}</p>
                 <div className="input-container">
                     <label htmlFor="password">Password</label>
                     <input onBlur={(e) => setPassword(e.target.value)} type="password" name="password" id="password" required />
